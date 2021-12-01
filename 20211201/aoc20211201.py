@@ -52,5 +52,4 @@ def sonar_sweep_pt2(filename):
 
 
 print(sonar_sweep_pt1("sonarSweepReport_input"))
-
 print(sonar_sweep_pt2("sonarSweepReport_input"))
