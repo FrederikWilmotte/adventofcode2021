@@ -9,18 +9,23 @@ def read_file(filename):
     return open(filename, "r")
 
 
+# --------------------
+# --- Create array ---
+# --------------------
+def create_array(filename):
+    array = []
+    for element in read_file(filename):
+        array.append(int(element))
+    return array
+
+
 # --------------
 # --- Part 1 ---
 # --------------
 def sonar_sweep_pt1(filename):
 
-    sea_depth_array = []
+    sea_depth_array = create_array(filename)
 
-    # Load sea floor depth in array
-    for seaDepth in read_file(filename):
-        sea_depth_array.append(int(seaDepth))
-
-    # Compare current sea depth with previous sea depth and add if it increases
     depth_increase = 0
     while len(sea_depth_array) > 1:
         if sea_depth_array[1] > sea_depth_array[0]:
@@ -35,13 +40,8 @@ def sonar_sweep_pt1(filename):
 # --------------
 def sonar_sweep_pt2(filename):
 
-    sea_depth_array = []
+    sea_depth_array = create_array(filename)
 
-    # Load sea floor depth in array
-    for seaDepth in read_file(filename):
-        sea_depth_array.append(int(seaDepth))
-
-    # Compare sum of 3 sea depths and with previous
     depth_increase = 0
     while len(sea_depth_array) > 3:
         if sum(sea_depth_array[1:4]) > sum(sea_depth_array[0:3]):
