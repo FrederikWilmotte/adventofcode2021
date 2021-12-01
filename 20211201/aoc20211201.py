@@ -2,38 +2,55 @@
 # Author: Frederik Wilmotte
 # --- Day 1: Sonar Sweep ---
 
+# ------------------
+# --- Read input ---
+# ------------------
+def read_file(filename):
+    return open(filename, "r")
 
-seaDepthArray = []
-depthIncrease = 0
-depthIncrease2 = 0
+
+# --------------
+# --- Part 1 ---
+# --------------
+def sonar_sweep_pt1(filename):
+
+    sea_depth_array = []
+
+    # Load sea floor depth in array
+    for seaDepth in read_file(filename):
+        sea_depth_array.append(int(seaDepth))
+
+    # Compare current sea depth with previous sea depth and add if it increases
+    depth_increase = 0
+    while len(sea_depth_array) > 1:
+        if sea_depth_array[1] > sea_depth_array[0]:
+            depth_increase += 1
+        sea_depth_array.pop(0)
+
+    return depth_increase
 
 
-def read_file():
-    return open("sonarSweepReport_input", "r")
+# --------------
+# --- Part 2 ---
+# --------------
+def sonar_sweep_pt2(filename):
 
-# Part 1
+    sea_depth_array = []
 
-# Load sea floor depth in array
-seaDepthArray.clear()
-for seaDepth in read_file():
-    seaDepthArray.append(int(seaDepth))
+    # Load sea floor depth in array
+    for seaDepth in read_file(filename):
+        sea_depth_array.append(int(seaDepth))
 
-while len(seaDepthArray) > 1:
-    if seaDepthArray[1] > seaDepthArray[0]:
-        depthIncrease += 1
-    seaDepthArray.pop(0)
+    # Compare sum of 3 sea depths and with previous
+    depth_increase = 0
+    while len(sea_depth_array) > 3:
+        if sum(sea_depth_array[1:4]) > sum(sea_depth_array[0:3]):
+            depth_increase += 1
+        sea_depth_array.pop(0)
 
-# Part 2
+    return depth_increase
 
-# Load sea floor depth in array
-seaDepthArray.clear()
-for seaDepth in read_file():
-    seaDepthArray.append(int(seaDepth))
 
-while len(seaDepthArray) > 3:
-    if sum(seaDepthArray[1:4]) > sum(seaDepthArray[0:3]):
-        depthIncrease2 += 1
-    seaDepthArray.pop(0)
+print(sonar_sweep_pt1("sonarSweepReport_input"))
 
-print("Number of depth increase - Part 1:", depthIncrease)
-print("Number of depth increase - Part 2:", depthIncrease2)
+print(sonar_sweep_pt2("sonarSweepReport_input"))
